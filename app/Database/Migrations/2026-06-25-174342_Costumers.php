@@ -49,7 +49,6 @@ class Costumers extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->addUniqueKey('external_id');
         $this->forge->createTable('customers');
     }
 

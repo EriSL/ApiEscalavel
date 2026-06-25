@@ -1,32 +1,39 @@
 <?php 
 
 namespace App\Services\Costumers;
-
-class CostumersService
+use App\Models\Costumers\CostumerModel;
+class CostumersServices
 {
+    private object $costumerModel;
+
+    public function __construct()
+    {
+        $this->costumerModel = new CostumerModel();
+    }
+
     public function getAllCostumers()
     {
-        // Logic to retrieve all costumers from the database
+        return $this->costumerModel->findAll();
     }
 
     public function getCostumerById($id)
     {
-        // Logic to retrieve a specific costumer by ID from the database
+        return $this->costumerModel->find($id);
     }
 
     public function createCostumer($data)
     {
-        // Logic to create a new costumer in the database
+        return $this->costumerModel->insert($data);
     }
 
     public function updateCostumer($id, $data)
     {
-        // Logic to update an existing costumer in the database
+        return $this->costumerModel->update($data, $id);
     }
 
     public function deleteCostumer($id)
     {
-        // Logic to delete a costumer from the database
+        return $this->costumerModel->delete($id);
     }
 }
 

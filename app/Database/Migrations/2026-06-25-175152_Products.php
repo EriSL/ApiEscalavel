@@ -46,6 +46,10 @@ class Products extends Migration
                 'constraint' => 255,
                 'null'       => true,
             ],
+            'visible'   => [
+                'type'       => 'BOOLEAN',
+                'default'    => true,
+            ],
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => true,
@@ -60,7 +64,6 @@ class Products extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addUniqueKey('external_id');
         $this->forge->createTable('products');
     }
 
