@@ -20,3 +20,4 @@ application/logs/*
 #CodeIgniter 4
 writable/*
 .env
+.env.*
