@@ -24,11 +24,18 @@ class CostumerService
         $this->costumerModel = new CostumerModel();
     }
 
-    public function getAllCostumers()
+    public function getAllCostumers(int $page = 1, int $perPage = 10)
     {
+        if($perPage > 100) {
+            return [
+                'error' => 'A quantidade por página não pode ser maior que 100',
+                'code' => 400
+            ];
+        }
+
         return $this->costumerModel
             ->select(self::PUBLIC_FIELDS)
-            ->findAll();
+            ->paginate($page, $perPage);
     }
 
     public function getCostumerById($external_id)
@@ -36,7 +43,7 @@ class CostumerService
         return $this->costumerModel
             ->select(self::PUBLIC_FIELDS)
             ->where('external_id', $external_id)
-            ->first();
+            ->paginate();
     }
 
     public function updateCostumer($external_id, $data)
