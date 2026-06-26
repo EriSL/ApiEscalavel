@@ -9,7 +9,7 @@ class CustomerSeeder extends Seeder
 {
     public function run()
     {
-        $fabricator = new Fabricator('App\Models\Customer');
-        $fabricator->create(50000);
+        $fabricator = new Fabricator('App\Models\Costumers\CostumerModel');
+        $fabricator->create(5000);
     }
 }

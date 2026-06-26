@@ -7,6 +7,18 @@ $routes->get('/', 'Home::index');
 
 
 /**
+ * Admin Routes
+ * @version 1.0.0
+ * @description Rota Responsavel por listar todas as ações ligadas a administração (dashboard).
+ * @author erivan <email>
+ * @return mixed
+ */
+$routes->group('admin', function ($routes) {
+    $routes->get('dashboard', '\App\Controllers\Admin\Dashboard\DashboardController::index');
+});
+
+
+/**
  * Costumers Routes
  * @version 1.0.0
  * @description Rota Responsavel por listar todas as ações ligadas a cliente (criar, atualizar e deletar).

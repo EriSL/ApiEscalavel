@@ -13,9 +13,11 @@ class CostumerModel extends Model
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
+        'external_id',
         'name',
         'email',
         'phone',
+        'profile_image',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -43,7 +45,7 @@ class CostumerModel extends Model
     // Callbacks
     protected $allowCallbacks = true;
     protected $beforeInsert   = [
-        'uuidRegister'
+        #@todo Otimizar a geração de UUID 'uuidRegister'
     ];
     protected $afterInsert    = [];
     protected $beforeUpdate   = [];
@@ -62,5 +64,16 @@ class CostumerModel extends Model
         }
 
         return $data;
+    }
+
+    public function fake(\Faker\Generator &$faker): array
+    {
+        return [
+            'external_id'       => $faker->uuid(),
+            'name'              => $faker->words( 4, true),
+            'email'             => $faker->email(),
+            'phone'             => $faker->phoneNumber(),
+            'profile_image'    => $faker->imageUrl(),
+        ];
     }
 }

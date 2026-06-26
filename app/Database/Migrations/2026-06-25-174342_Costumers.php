@@ -34,6 +34,11 @@ class Costumers extends Migration
                 'constraint' => 20,
                 'null'       => true,
             ],
+            'profile_image' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 255,
+                'null'       => true,
+            ],
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => true,
