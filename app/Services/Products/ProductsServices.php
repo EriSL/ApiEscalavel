@@ -13,6 +13,11 @@ class ProductsServices
         $this->productModel = new ProductModel();
     }
 
+    public function getAllProducts()
+    {
+        return $this->productModel->findAll();
+    }
+
     public function getProductById(int $id)
     {
         return $this->productModel->find($id);

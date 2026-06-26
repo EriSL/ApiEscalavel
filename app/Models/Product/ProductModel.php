@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class ProductModel extends Model
 {
     protected $table            = 'products';
-    protected $primaryKey       = 'id';
+    protected $primaryKey       = 'external_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'object';
     protected $useSoftDeletes   = true;
@@ -47,7 +47,10 @@ class ProductModel extends Model
 
     // Callbacks
     protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
+    protected $beforeInsert   = [
+        //@todo Implementar a função de gerar uuid para o registro e não depender do dev
+        //'uuidRegister'
+    ];
     protected $afterInsert    = [];
     protected $beforeUpdate   = [];
     protected $afterUpdate    = [];
@@ -55,4 +58,30 @@ class ProductModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function fake(\Faker\Generator &$faker): array
+    {
+        return [
+            'external_id'       => $faker->uuid(),
+            'name'              => $faker->words( 4, true),
+            'description'       => $faker->sentence(),
+            'price'             => $faker->randomFloat(2, 1, 1000),
+            'promotional_price' => $faker->randomFloat(2, 1, 1000),
+            'stock_quantity'    => $faker->numberBetween(1, 100),
+            'image_url'         => $faker->imageUrl(),
+            'visible'           => $faker->boolean(),
+        ];
+    }
+
+    protected function uuidRegister() 
+    {
+        helper('get_uuid');
+        
+        if (empty($data['data']['external_id'])) {
+            $data['data']['external_id'] = get_uuid();
+        }
+
+        return $data;
+    }
+
 }

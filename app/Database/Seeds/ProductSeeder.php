@@ -8,7 +8,7 @@ class ProductSeeder extends Seeder
 {
     public function run()
     {
-        $fabricator = new Fabricator('App\Models\ProductModel');
-        $fabricator->make(10000);
+        $fabricator = new Fabricator('App\Models\Product\ProductModel');
+        $fabricator->create(10000);
     }
 }

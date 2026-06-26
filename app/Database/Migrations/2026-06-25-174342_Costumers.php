@@ -49,11 +49,11 @@ class Costumers extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->createTable('customers');
+        $this->forge->createTable('costumers');
     }
 
     public function down()
     {
-        $this->forge->dropTable('customers');
+        $this->forge->dropTable('costumers');
     }
 }

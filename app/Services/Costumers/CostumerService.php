@@ -2,7 +2,8 @@
 
 namespace App\Services\Costumers;
 use App\Models\Costumers\CostumerModel;
-class CostumersServices
+
+class CostumerService
 {
     private object $costumerModel;
 

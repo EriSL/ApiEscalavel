@@ -1,7 +1,6 @@
 <?php
 
 use CodeIgniter\Router\RouteCollection;
-use App\Controllers\Costumers\CustomersController;
 
 /** @var RouteCollection $routes */
 $routes->get('/', 'Home::index');
@@ -15,9 +14,24 @@ $routes->get('/', 'Home::index');
  * @return mixed
  */
 $routes->group('costumers', function ($routes) {
-    $routes->get('list', 'CustomersController::index');
-    $routes->get('(:num)', 'CustomersController::show/$1');
-    $routes->post('/', 'CustomersController::store');
-    $routes->put('(:num)', 'CustomersController::update/$1');
-    $routes->delete('(:num)', 'CustomersController::destroy/$1');
+    $routes->get('list', '\App\Controllers\Costumers\CustomersController::index');
+    $routes->get('list/(:num)', '\App\Controllers\Costumers\CustomersController::show/$1');
+    $routes->post('store/', '\App\Controllers\Costumers\CustomersController::store');
+    $routes->put('update/(:num)', '\App\Controllers\Costumers\CustomersController::update/$1');
+    $routes->delete('delete/(:num)', '\App\Controllers\Costumers\CustomersController::destroy/$1');
+});
+
+/**
+ * Products Routes
+ * @version 1.0.0
+ * @description Rota Responsavel por listar todas as ações ligadas a produtos (criar, atualizar e deletar).
+ * @author erivan <email>
+ * @return mixed
+ */
+$routes->group('products', function ($routes) {
+    $routes->get('list', '\App\Controllers\Produtcs\ProdutcsController::index');
+    $routes->get('(:num)', '\App\Controllers\Produtcs\ProdutcsController::show/$1');
+    $routes->post('store/', '\App\Controllers\Produtcs\ProdutcsController::store');
+    $routes->put('update/(:num)', '\App\Controllers\Produtcs\ProdutcsController::update/$1');
+    $routes->delete('delete/(:num)', '\App\Controllers\Produtcs\ProdutcsController::destroy/$1');
 });

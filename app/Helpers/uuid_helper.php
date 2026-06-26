@@ -2,13 +2,13 @@
 
 use Ramsey\Uuid\Uuid;
 
-if(!function_exists('generate_uuid')) {
+if(!function_exists('get_uuid')) {
     /**
-     * Generate a UUID (Universally Unique Identifier)
-     *
+     * Gerador de UUID (Universally Unique Identifier)
+     * 
      * @return string The generated UUID
      */
-    function generate_uuid(): string
+    function get_uuid(): string
     {
         return Uuid::uuid4()->toString();
     }

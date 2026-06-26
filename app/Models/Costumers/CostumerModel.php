@@ -13,7 +13,6 @@ class CostumerModel extends Model
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'external_id',
         'name',
         'email',
         'phone',
@@ -43,7 +42,9 @@ class CostumerModel extends Model
 
     // Callbacks
     protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
+    protected $beforeInsert   = [
+        'uuidRegister'
+    ];
     protected $afterInsert    = [];
     protected $beforeUpdate   = [];
     protected $afterUpdate    = [];
@@ -51,4 +52,15 @@ class CostumerModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    protected function uuidRegister()
+    {
+        helper('get_uuid');
+
+        if (empty($data['data']['external_id'])) {
+            $data['data']['external_id'] = get_uuid();
+        }
+
+        return $data;
+    }
 }
