@@ -3,7 +3,38 @@
 use CodeIgniter\Router\RouteCollection;
 
 /** @var RouteCollection $routes */
-$routes->get('/', 'Home::index');
+
+
+/**
+ * Redirect para login
+ */
+if(!session()->has('user_id')) {
+    $routes->addRedirect('/', 'admin/dashboard');
+} else {
+    $routes->addRedirect('/', 'auth/login');
+}
+
+
+/**
+ * Rotas de Autenticação
+ * @version 1.0.0
+ * @description Rotas responsaveis pela autenticação no sistema
+ * @author erivan <email>
+ * @return mixed
+ */
+$routes->group('auth', function ($routes) {
+    $routes->get('login', '\App\Controllers\Auth\AuthController::login');
+    
+    $routes->group('register', ['filter' => 'session'], function ($routes) {
+        $routes->get('/', '\App\Controllers\Auth\AuthController::register');
+    });
+    
+    $routes->group('logout', ['filter' => 'session'], function ($routes) {
+        $routes->get('/', '\App\Controllers\Auth\AuthController::logout');
+    });
+
+});
+
 
 
 /**
@@ -13,7 +44,7 @@ $routes->get('/', 'Home::index');
  * @author erivan <email>
  * @return mixed
  */
-$routes->group('admin', function ($routes) {
+$routes->group('admin', ['filter' => 'session'], function ($routes) {
     $routes->get('dashboard', '\App\Controllers\Admin\Dashboard\DashboardController::index');
 });
 
@@ -25,7 +56,7 @@ $routes->group('admin', function ($routes) {
  * @author erivan <email>
  * @return mixed
  */
-$routes->group('costumers', function ($routes) {
+$routes->group('costumers', ['filter' => 'session'], function ($routes) {
     $routes->get('list', '\App\Controllers\Costumers\CustomersController::index');
     $routes->get('list/(:num)', '\App\Controllers\Costumers\CustomersController::show/$1');
     $routes->post('store/', '\App\Controllers\Costumers\CustomersController::store');
@@ -40,7 +71,7 @@ $routes->group('costumers', function ($routes) {
  * @author erivan <email>
  * @return mixed
  */
-$routes->group('products', function ($routes) {
+$routes->group('products', ['filter' => 'session'], function ($routes) {
     $routes->get('list', '\App\Controllers\Produtcs\ProdutcsController::index');
     $routes->get('(:num)', '\App\Controllers\Produtcs\ProdutcsController::show/$1');
     $routes->post('store/', '\App\Controllers\Produtcs\ProdutcsController::store');

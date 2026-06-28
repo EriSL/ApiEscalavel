@@ -88,8 +88,5 @@ class Autoload extends AutoloadConfig
      *
      * @var list<string>
      */
-    public $helpers = [
-        'csrf',
-        'url',
-    ];
+    public $helpers = ['csrf', 'url', 'auth', 'setting'];
 }
