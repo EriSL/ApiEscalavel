@@ -29,9 +29,9 @@ class ProdutcsController extends BaseController
             );
         }
         
-        return $this->respond(
+        return $this->paginate(
             $products, 
-            200, 
+            20,
             'Produtos Listados com Sucesso',
         );
     }

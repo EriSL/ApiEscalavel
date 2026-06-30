@@ -21,10 +21,8 @@ class CustomersController extends BaseController
     {
         $costumers = $this->customersService->getAllCostumers();
         
-        return $this->respond(
-            $costumers, 
-            200, 
-            get_uuid()
+        return $this->paginate(
+            $costumers,20
         );
     }
 
