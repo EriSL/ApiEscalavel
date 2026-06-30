@@ -23,10 +23,10 @@ if(!session()->has('user_id')) {
  * @return mixed
  */
 $routes->group('auth', function ($routes) {
-    $routes->get('login', '\App\Controllers\Auth\AuthController::login');
+    $routes->post('login', '\App\Controllers\Auth\AuthController::login');
     
     $routes->group('register', ['filter' => 'session'], function ($routes) {
-        $routes->get('/', '\App\Controllers\Auth\AuthController::register');
+        $routes->post('/', '\App\Controllers\Auth\AuthController::register');
     });
     
     $routes->group('logout', ['filter' => 'session'], function ($routes) {
@@ -73,7 +73,7 @@ $routes->group('costumers', ['filter' => 'session'], function ($routes) {
  */
 $routes->group('products', ['filter' => 'session'], function ($routes) {
     $routes->get('list', '\App\Controllers\Produtcs\ProdutcsController::index');
-    $routes->get('(:num)', '\App\Controllers\Produtcs\ProdutcsController::show/$1');
+    $routes->get('details/(:num)', '\App\Controllers\Produtcs\ProdutcsController::show/$1');
     $routes->post('store/', '\App\Controllers\Produtcs\ProdutcsController::store');
     $routes->put('update/(:num)', '\App\Controllers\Produtcs\ProdutcsController::update/$1');
     $routes->delete('delete/(:num)', '\App\Controllers\Produtcs\ProdutcsController::destroy/$1');
