@@ -11,10 +11,11 @@ class HealthController extends BaseController
 
     public function index()
     {
-        return $this->respond([
-            'code' => 418,
-            'message' => "I'm a teapot",
-            'status' => ':)'
-        ]);
+        return $this->respond(
+            "I'm a teapot",    
+            418,
+            ':)',
+
+        );
     }
 }
