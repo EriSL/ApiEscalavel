@@ -24,12 +24,12 @@ if(!session()->has('user_id')) {
  */
 $routes->group('auth', function ($routes) {
     $routes->post('login', '\App\Controllers\Auth\AuthController::login');
-    
-    $routes->group('register', ['filter' => 'api-auth'], function ($routes) {
+
+    $routes->group('register', ['filter' => 'tokens'], function ($routes) {
         $routes->post('/', '\App\Controllers\Auth\AuthController::register');
     });
     
-    $routes->group('logout', ['filter' => 'api-auth'], function ($routes) {
+    $routes->group('logout', ['filter' => 'tokens'], function ($routes) {
         $routes->get('/', '\App\Controllers\Auth\AuthController::logout');
     });
 
@@ -44,7 +44,7 @@ $routes->group('auth', function ($routes) {
  * @author erivan <email>
  * @return mixed
  */
-$routes->group('admin', ['filter' => 'api-auth'], function ($routes) {
+$routes->group('admin', ['filter' => 'tokens'], function ($routes) {
     $routes->get('dashboard', '\App\Controllers\Admin\Dashboard\DashboardController::index');
 });
 
@@ -56,7 +56,7 @@ $routes->group('admin', ['filter' => 'api-auth'], function ($routes) {
  * @author erivan <email>
  * @return mixed
  */
-$routes->group('costumers', ['filter' => 'api-auth'], function ($routes) {
+$routes->group('costumers', ['filter' => 'tokens'], function ($routes) {
     $routes->get('list', '\App\Controllers\Costumers\CustomersController::index');
     $routes->get('list/(:num)', '\App\Controllers\Costumers\CustomersController::show/$1');
     $routes->post('store/', '\App\Controllers\Costumers\CustomersController::store');
@@ -71,7 +71,7 @@ $routes->group('costumers', ['filter' => 'api-auth'], function ($routes) {
  * @author erivan <email>
  * @return mixed
  */
-$routes->group('products', ['filter' => 'api-auth'], function ($routes) {
+$routes->group('products', ['filter' => 'tokens'], function ($routes) {
     $routes->get('list', '\App\Controllers\Produtcs\ProdutcsController::index');
     $routes->get('details/(:num)', '\App\Controllers\Produtcs\ProdutcsController::show/$1');
     $routes->post('store/', '\App\Controllers\Produtcs\ProdutcsController::store');

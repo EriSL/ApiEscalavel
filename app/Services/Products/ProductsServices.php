@@ -25,9 +25,15 @@ class ProductsServices
 
     public function getAllProducts()
     {
-        return $this->productModel
+        //@fix Permitir que o usuário selecione o número de produtos por página, e a página que deseja acessar.
+        $products = $this->productModel
             ->select(self::PUBLIC_FIELDS)
-            ->findAll();
+            ->paginate(50);
+
+        return [
+            'data'  => $products,
+            'pager' => $this->productModel->pager,
+        ];
     }
 
     public function getProductById(int $id)

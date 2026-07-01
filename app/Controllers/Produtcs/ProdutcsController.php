@@ -23,17 +23,15 @@ class ProdutcsController extends BaseController
 
         if(empty($products)) {
             return $this->respond(
-                [],
-                404,
-                'Nenhum produto encontrado',
+                'Nenhum Produto Encontrado',
+                204,
             );
         }
         
-        return $this->paginate(
-            $products, 
-            20,
-            'Produtos Listados com Sucesso',
-        );
+        return $this->respond([
+            'data' => $products['data'],
+            'pagination' => $products['pager']->getDetails(),
+        ]);
     }
 
     public function show($id)
