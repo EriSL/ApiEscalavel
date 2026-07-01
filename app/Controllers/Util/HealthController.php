@@ -14,8 +14,7 @@ class HealthController extends BaseController
         return $this->respond(
             "I'm a teapot",    
             418,
-            ':)',
-
+           ':)',
         );
     }
 }

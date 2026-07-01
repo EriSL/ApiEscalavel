@@ -10,45 +10,43 @@ class Products extends Migration
     {
         $this->forge->addField([
             'id' => [
-                'type'           => 'INT',
-                'constraint'     => 11,
+                'type'           => 'bigint',
+                'constraint'     => 20,
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
             'external_id' => [
                 'type'       => 'VARCHAR',
-                'constraint' => 50,
-                'unique'     => true,
+                'constraint' => 36,
+            ],
+            'ean_code' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 13,
             ],
             'name' => [
                 'type'       => 'VARCHAR',
-                'constraint' => 150,
+                'constraint' => 255,
             ],
             'description' => [
-                'type'       => 'TEXT',
+                'type' => 'TEXT',
+                'null' => true,
+            ],
+            'marca_id' => [
+                'type'       => 'BIGINT',
+                'constraint' => 20,
+                'unsigned'   => true,
                 'null'       => true,
             ],
-            'price' => [
-                'type'       => 'DECIMAL',
-                'constraint' => [10, 2],
-            ],
-            'promotional_price' => [
-                'type'       => 'DECIMAL',
-                'constraint' => [10, 2],
+            'categoria_id' => [
+                'type'       => 'BIGINT',
+                'constraint' => 20,
+                'unsigned'   => true,
                 'null'       => true,
             ],
-            'stock_quantity' => [
-                'type'       => 'INT',
-                'constraint' => 11,
-            ],
-            'image_url' => [
-                'type'       => 'VARCHAR',
-                'constraint' => 255,
-                'null'       => true,
-            ],
-            'visible'   => [
-                'type'       => 'BOOLEAN',
-                'default'    => true,
+            'ativo' => [
+                'type'       => 'TINYINT',
+                'constraint' => 1,
+                'default'    => 1,
             ],
             'created_at' => [
                 'type' => 'DATETIME',
@@ -58,12 +56,11 @@ class Products extends Migration
                 'type' => 'DATETIME',
                 'null' => true,
             ],
-            'deleted_at' => [
-                'type' => 'DATETIME',
-                'null' => true,
-            ],
         ]);
+
         $this->forge->addKey('id', true);
+        $this->forge->addKey('external_id', true);
+        $this->forge->addKey('ean_code', true);
         $this->forge->createTable('products');
     }
 
