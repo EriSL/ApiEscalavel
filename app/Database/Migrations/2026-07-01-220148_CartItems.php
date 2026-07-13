@@ -14,6 +14,11 @@ class CartItems extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
+            'uuid' => [
+                'type' => 'VARCHAR',
+                'constraint' => 45,
+                'unique' => true,
+            ],
             'cart_id' => [
                 'type' => 'BIGINT',
                 'unsigned' => true,
@@ -69,10 +74,16 @@ class CartItems extends Migration
                 'null' => true,
             ],
         ]);
+
+        $this->forge->addKey('id', true);
+        $this->forge->addKey('cart_id');
+        $this->forge->addKey('produto_id');
+        $this->forge->addUniqueKey('uuid');
+        $this->forge->createTable('carrinho_itens');
     }
 
     public function down()
     {
-        //
+        $this->forge->dropTable('carrinho_itens');
     }
 }

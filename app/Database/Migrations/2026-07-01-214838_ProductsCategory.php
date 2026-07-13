@@ -15,7 +15,12 @@ class ProductsCategory extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'nome' => [
+            'uuid' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 45,
+                'unique'     => true,
+            ],
+            'descricao' => [
                 'type'       => 'VARCHAR',
                 'constraint' => 255,
             ],
@@ -36,6 +41,7 @@ class ProductsCategory extends Migration
         ]);
 
         $this->forge->addKey('id', true);
+        $this->forge->addKey('uuid', true);
         $this->forge->createTable('produtos_categoria');
     }
 

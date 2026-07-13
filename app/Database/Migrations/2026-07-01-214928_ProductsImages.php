@@ -15,6 +15,11 @@ class ProductsImages extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
+            'uuid' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 45,
+                'unique'     => true,
+            ],
             'produto_id' => [
                 'type'       => 'BIGINT',
                 'constraint' => 20,
@@ -42,6 +47,7 @@ class ProductsImages extends Migration
 
         $this->forge->addKey('id', true);
         $this->forge->addKey('produto_id');
+        $this->forge->addUniqueKey('uuid');
         $this->forge->createTable('produtos_imagem');
     }
 

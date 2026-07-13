@@ -14,6 +14,11 @@ class Cart extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
+            'uuid' => [
+                'type' => 'VARCHAR',
+                'constraint' => 45,
+                'unique' => true,
+            ],
             'cliente_id' => [
                 'type' => 'BIGINT',
                 'unsigned' => true,
@@ -62,10 +67,15 @@ class Cart extends Migration
                 'null' => true,
             ],
         ]);
+
+        $this->forge->addKey('id', true);
+        $this->forge->addUniqueKey('uuid');
+        $this->forge->createTable('carrinho');
     }
 
     public function down()
     {
-        //
+        $this->forge->dropTable('carrinho');
     }
+    
 }

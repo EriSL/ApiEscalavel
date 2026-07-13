@@ -14,6 +14,11 @@ class Orders extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
+            'uuid' => [
+                'type' => 'VARCHAR',
+                'constraint' => 45,
+                'unique' => true,
+            ],
             'cliente_id' => [
                 'type' => 'BIGINT',
                 'unsigned' => true,
@@ -69,10 +74,17 @@ class Orders extends Migration
                 'null' => true,
             ],
         ]);
+
+        
+        $this->forge->addKey('id', true);
+        $this->forge->addUniqueKey('uuid');
+        $this->forge->createTable('pedidos');
+    
     }
+
 
     public function down()
     {
-        //
+        $this->forge->dropTable('pedidos');
     }
 }

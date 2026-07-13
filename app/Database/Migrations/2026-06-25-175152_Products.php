@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Products extends Migration
+class Produtos extends Migration
 {
     public function up()
     {
@@ -15,19 +15,21 @@ class Products extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'external_id' => [
+            'uuid' => [
                 'type'       => 'VARCHAR',
-                'constraint' => 36,
+                'constraint' => 45,
+                'unique'     => true,
             ],
-            'ean_code' => [
+            'codigo_ean' => [
                 'type'       => 'VARCHAR',
                 'constraint' => 13,
+                'unique'     => true,
             ],
-            'name' => [
+            'nome' => [
                 'type'       => 'VARCHAR',
                 'constraint' => 255,
             ],
-            'description' => [
+            'descricao' => [
                 'type' => 'TEXT',
                 'null' => true,
             ],
@@ -43,11 +45,6 @@ class Products extends Migration
                 'unsigned'   => true,
                 'null'       => true,
             ],
-            'ativo' => [
-                'type'       => 'TINYINT',
-                'constraint' => 1,
-                'default'    => 1,
-            ],
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => true,
@@ -56,16 +53,20 @@ class Products extends Migration
                 'type' => 'DATETIME',
                 'null' => true,
             ],
+            'deleted_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->addKey('external_id', true);
-        $this->forge->addKey('ean_code', true);
-        $this->forge->createTable('products');
+        $this->forge->addKey('uuid', true);
+        $this->forge->addKey('codigo_ean', true);
+        $this->forge->createTable('produtos');
     }
 
     public function down()
     {
-        $this->forge->dropTable('products');
+        $this->forge->dropTable('produtos');
     }
 }

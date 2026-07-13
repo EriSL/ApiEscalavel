@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Costumers extends Migration
+class Clientes extends Migration
 {
     public function up()
     {
@@ -15,26 +15,26 @@ class Costumers extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'external_id' => [
+            'uuid' => [
                 'type'       => 'VARCHAR',
-                'constraint' => 50,
+                'constraint' => 45,
                 'unique'     => true,
             ],
-            'name' => [
+            'nome' => [
                 'type'       => 'VARCHAR',
-                'constraint' => 150,
+                'constraint' => 200,
             ],
             'email' => [
                 'type'       => 'VARCHAR',
-                'constraint' => 255,
+                'constraint' => 250,
                 'unique'     => true,
             ],
-            'phone' => [
+            'telefone' => [
                 'type'       => 'VARCHAR',
                 'constraint' => 20,
                 'null'       => true,
             ],
-            'profile_image' => [
+            'imagem_perfil' => [
                 'type'       => 'VARCHAR',
                 'constraint' => 255,
                 'null'       => true,
@@ -54,11 +54,12 @@ class Costumers extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->createTable('costumers');
+        $this->forge->addKey('uuid', true);
+        $this->forge->createTable('clientes');
     }
 
     public function down()
     {
-        $this->forge->dropTable('costumers');
+        $this->forge->dropTable('clientes');
     }
 }
